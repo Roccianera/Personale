@@ -1,0 +1,14 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "c:\\Users\\hamza\\Downloads\\apache-activemq-5.15.0-bin\\apache-activemq-5.15.0\\activemq-all-5.15.0.jar"
+        ],
+        "exclude": [
+            "lib/activemq-all-5.18.1.jar"
+        ]
+    },
+    "java.compile.nullAnalysis.mode": "automatic"
+}
