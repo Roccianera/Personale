@@ -1,10 +1,5 @@
 package server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Vector;
@@ -29,21 +24,6 @@ public class DispatcherImpl  extends UnicastRemoteObject implements IDispatcher{
   //      this.proxyPrinter =proxyPrinter;
     }
 
-    private void Callback(int PortNumber) throws IOException{
-
-        Socket socket  = new Socket(InetAddress.getLocalHost(), PortNumber);
-        DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-        DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-        dataOutputStream.writeUTF("Aggiunto Printer");
-
-        dataInputStream.readUTF();
-        
-        socket.close();
-
-
-    }
-
-
     @Override
     public boolean printRequest(String docName) throws RemoteException {      
        
@@ -59,6 +39,9 @@ public class DispatcherImpl  extends UnicastRemoteObject implements IDispatcher{
         return false;
 
 
+        
+
+
 
 
 
@@ -69,32 +52,10 @@ public class DispatcherImpl  extends UnicastRemoteObject implements IDispatcher{
     public void addPrinter(IPrinter printer, int PortNumber) throws RemoteException {
    
        // ports.add(PortNumber);
-        printers.add(printer);
+
+        printers.add(new Printerproxy(printer,PortNumber));
         System.out.println("Aggiunto printer con portNumeber  "+ PortNumber);
         
-        
-
-        try {
- 
-            Callback(PortNumber);
-
-
-
-        } catch (Exception e) {
-            System.out.println("Callback fallita ");
-            e.printStackTrace();
-        }
-
-
-
-
-
-
-
-
-
-
-
     }
 
 

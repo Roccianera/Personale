@@ -1,0 +1,12 @@
+ID :2 porta :8000 critc3
+ID :2 porta :8000 critc3
+ID :2 porta :8000 critc2
+ID :2 porta :8000 critc3
+ID :2 porta :8000 critc3
+ID :2 porta :8000 critc2
+ID :2 porta :8000 critc3
+ID :2 porta :8000 critc2
+ID :2 porta :8000 critc2
+ID :2 porta :8000 critc1
+ID :2 porta :8000 critc3
+ID :2 porta :8000 critc2

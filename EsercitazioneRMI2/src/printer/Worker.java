@@ -1,16 +1,20 @@
 package printer;
 
 import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.DataOutputStream;
 import java.net.Socket;
+
+import interfaccie.IPrinter;
 
 public class Worker extends Thread {
     
 
     private Socket socket ;
+    private IPrinter printer;
 
-    public Worker(Socket socket){
+    public Worker(Socket socket , IPrinter printer ){
         this.socket =socket;
+        this.printer= printer;
 
     }
 
@@ -19,16 +23,27 @@ public class Worker extends Thread {
 
     @Override
     public void run() {
-            DataInputStream dataInputStream;
-            try {
-                dataInputStream = new DataInputStream(socket.getInputStream());
-                String response= dataInputStream.readUTF();  
-                System.out.println("[CALLBACK] Printer aggiunto : " + response);
-                socket.close();
-            } catch (IOException e) {
-         
-                e.printStackTrace();
-            }
+
+        try {
+            DataInputStream dataInputStream= new DataInputStream(socket.getInputStream());
+            DataOutputStream dataOutputStream= new DataOutputStream(socket.getOutputStream());
+
+
+            String docName = dataInputStream.readUTF();
+            
+            dataOutputStream.writeBoolean(printer.print(docName));
+        
+
+            dataInputStream.close();
+            dataOutputStream.close();
+            socket.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+           
+
     }
 
 

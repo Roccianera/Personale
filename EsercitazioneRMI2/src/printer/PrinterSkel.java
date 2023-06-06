@@ -36,11 +36,8 @@ public class PrinterSkel implements IPrinter {
             while (true) {
 
                 Socket socket = serverSocket.accept();
-                Worker worker = new Worker(socket);
+                Worker worker = new Worker(socket,this);
                 worker.run();
-
-
-                
             }
 
        
