@@ -1,0 +1,5 @@
+Lettura :  43
+Lettura :  20
+Lettura :  42
+Lettura :  0
+Lettura :  50

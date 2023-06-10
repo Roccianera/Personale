@@ -1,0 +1,4 @@
+Lettura :  22
+Lettura :  34
+Lettura :  33
+Lettura :  42
