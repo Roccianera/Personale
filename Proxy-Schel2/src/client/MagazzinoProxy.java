@@ -1,9 +1,9 @@
 package client;
 
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.Socket;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 import interfaccia.IMaggazzino;
 
@@ -21,7 +21,7 @@ public class MagazzinoProxy  implements IMaggazzino{
     @Override
     public void deposita(String articolo, int id) {
 
-
+        /* 
         try {
             Socket socket = new Socket(address, port);
             DataOutputStream  dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -37,7 +37,34 @@ public class MagazzinoProxy  implements IMaggazzino{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+        */
+
+        try {
+            
+            DatagramSocket socket = new DatagramSocket();
+    
+            String mess = new String(articolo+"-"+Integer.toString(id));
+    
+            DatagramPacket packet = new DatagramPacket(mess.getBytes(), mess.getBytes().length,  InetAddress.getLocalHost(), port);
+
+            socket.send(packet);
+            
+
+            
+
+
+
+            socket.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
         
     }
 
@@ -46,6 +73,8 @@ public class MagazzinoProxy  implements IMaggazzino{
     
         int id =0 ;
 
+
+        /* 
         try {
             Socket socket = new Socket(address, port);
             DataOutputStream  dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -62,6 +91,41 @@ public class MagazzinoProxy  implements IMaggazzino{
             e.printStackTrace();
         }
         
+
+
+        */
+
+
+
+        try {
+            
+            DatagramSocket socket = new DatagramSocket();
+    
+            String mess = new String(articolo);
+    
+            DatagramPacket packet = new DatagramPacket(mess.getBytes(), mess.getBytes().length,  InetAddress.getLocalHost(), port);
+
+
+            socket.send(packet);
+
+            byte[] buff = new byte[1024];
+
+            packet = new DatagramPacket(buff, buff.length);
+
+            socket.receive(packet);
+        
+            String response = new String(packet.getData(), 0, packet.getLength());
+
+            id = Integer.parseInt(response);
+        
+            socket.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
 
 
         return id;

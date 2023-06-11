@@ -1,5 +1,7 @@
 package server;
 
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -15,7 +17,7 @@ public abstract class MagazzinoSkelE  implements IMaggazzino{
 
                 ServerSocket serverSocket = new ServerSocket(8000);
 
-                System.out.println("Server accesso ...");
+                System.out.println("Server acceso ...");
 
                 while (true) {
                     Socket socket =  serverSocket.accept();
@@ -28,17 +30,39 @@ public abstract class MagazzinoSkelE  implements IMaggazzino{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
-            
-      
-
-
-
-
-
+        
 
 
         
+    }
+
+
+    void runSkeletonUDP(){
+
+
+        try {
+            
+            DatagramSocket socketServer = new DatagramSocket(8000);
+
+            System.out.println("Server acceso...");
+
+
+            while (true) {
+
+                DatagramSocket socket = socketServer
+                
+            }
+
+
+
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();// TODO: handle exception
+        }
+
     }
 
 
